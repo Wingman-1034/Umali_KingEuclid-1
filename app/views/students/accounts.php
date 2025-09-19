@@ -25,41 +25,49 @@
     </aside>
 
     <!-- Main Content -->
-    <div class="container mt-3 ">
-	<form action="<?=site_url('/');?>" method="get" class="col-sm-4 float-end d-flex">
-		<?php
-		$q = '';
-		if(isset($_GET['q'])) {
-			$q = $_GET['q'];
-		}
-		?>
-        <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
-        <button type="submit" class="btn btn-primary" type="button">Search</button>
-	</form>
-	<h2>Author Lists</h2>
-	<table class="table table-striped">
-		<thead>
-		<tr>
-			<th>ID</th>
-            <th>Lastname</th>
-			<th>Firstname</th>			
-			<th>Email</th>
-		</tr>
-		</thead>
-		<tbody>
-		<?php foreach(html_escape($all) as $author): ?>
-		<tr>
-            <td><?=$author['id'];?></td>
-            <td><?=$author['last_name'];?></td>
-			<td><?=$author['first_name'];?></td>			
-			<td><?=$author['email'];?></td>
-		</tr>
-		<?php endforeach; ?>
-		</tbody>
-	</table>
-	<?php
-	echo $page;?>
-	</div>
+    <div class="flex-1 p-10">
+        <form action="<?=site_url('/');?>" method="get" class="flex justify-end mb-6 gap-2">
+            <?php
+            $q = '';
+            if(isset($_GET['q'])) {
+                $q = $_GET['q'];
+            }
+            ?>
+            <input class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Search</button>
+        </form>
+        <h2 class="text-xl font-semibold mb-4">Author Lists</h2>
+        <div class="overflow-x-auto rounded-lg shadow">
+            <table class="min-w-full bg-white">
+                <thead>
+                <tr class="bg-blue-100 text-gray-700">
+                    <th class="py-2 px-4 text-left">ID</th>
+                    <th class="py-2 px-4 text-left">Lastname</th>
+                    <th class="py-2 px-4 text-left">Firstname</th>
+                    <th class="py-2 px-4 text-left">Email</th>
+                    <th class="py-2 px-4 text-left">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach(html_escape($all) as $author): ?>
+                <tr class="border-b hover:bg-blue-50">
+                    <td class="py-2 px-4"><?=$author['id'];?></td>
+                    <td class="py-2 px-4"><?=$author['last_name'];?></td>
+                    <td class="py-2 px-4"><?=$author['first_name'];?></td>
+                    <td class="py-2 px-4"><?=$author['email'];?></td>
+                    <td class="py-2 px-4">
+                        <a href="<?=site_url('/students/edit/'.$author['id']);?>" class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition text-sm">Edit</a>
+                        <a href="<?=site_url('/students/delete/'.$author['id']);?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4">
+            <?php echo $page;?>
+        </div>
+    </div>
 
 </body>
 </html>
