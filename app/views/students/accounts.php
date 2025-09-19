@@ -39,6 +39,16 @@
         <button type="submit" class="btn btn-primary" type="button">Search</button>
 	</form>
 	<h2>Students Lists</h2>
+    <div class="flex gap-3 mb-4">
+        <a href="/students/create" class="bg-green-600 text-white px-5 py-2 rounded-lg shadow hover:bg-green-700 transition">
+            + Add New Student
+        </a>
+        <a href="/students/delete_all"
+            onclick="return confirm('Are you sure you want to delete ALL records?')"
+            class="bg-red-700 text-white px-5 py-2 rounded-lg shadow hover:bg-red-800 transition">
+            Delete All
+        </a>
+    </div>
 	<table class="table table-striped">
 		<thead>
 		<tr>
