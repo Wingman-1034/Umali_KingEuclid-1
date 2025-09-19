@@ -25,64 +25,41 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
-            <h1 class="text-3xl font-extrabold mb-8 text-gray-800">Student Accounts</h1>
-
-            <div class="flex gap-3 mb-4">
-                <a href="/students/create" class="bg-green-600 text-white px-5 py-2 rounded-lg shadow hover:bg-green-700 transition">
-                    + Add New Student
-                </a>
-                <a href="/students/delete_all"
-                    onclick="return confirm('Are you sure you want to delete ALL records?')"
-                    class="bg-red-700 text-white px-5 py-2 rounded-lg shadow hover:bg-red-800 transition">
-                    Delete All
-                </a>
-            </div>
-
-            <!-- Students Table -->
-            <div class="overflow-x-auto mt-6">
-                <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
-                    <thead>
-                        <tr class="bg-gradient-to-r from-blue-200 to-purple-200 text-gray-700">
-                            <th class="py-3 px-5 border-b font-semibold">ID</th>
-                            <th class="py-3 px-5 border-b font-semibold">Last Name</th>
-                            <th class="py-3 px-5 border-b font-semibold">First Name</th>
-                            <th class="py-3 px-5 border-b font-semibold">Email</th>
-                            <th class="py-3 px-5 border-b text-center font-semibold">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($students)): ?>
-                            <?php foreach ($students as $student): ?>
-                                <tr class="hover:bg-blue-50 transition">
-                                    <td class="py-3 px-5 border-b"><?= $student['id'] ?></td>
-                                    <td class="py-3 px-5 border-b"><?= $student['last_name'] ?></td>
-                                    <td class="py-3 px-5 border-b"><?= $student['first_name'] ?></td>
-                                    <td class="py-3 px-5 border-b"><?= $student['email'] ?></td>
-                                    <td class="py-3 px-5 border-b text-center">
-                                        <a href="/students/edit/<?= $student['id'] ?>" 
-                                        class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition shadow">
-                                            Edit
-                                        </a>
-                                        <a href="/students/delete/<?= $student['id'] ?>" 
-                                        onclick="return confirm('Are you sure you want to delete this student?')"
-                                        class="bg-red-600 text-white px-4 py-1 rounded-lg hover:bg-red-700 transition shadow ml-2">
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="5" class="text-center py-6 text-gray-500">No students found.</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+    <div class="container mt-3 ">
+	<form action="<?=site_url('author');?>" method="get" class="col-sm-4 float-end d-flex">
+		<?php
+		$q = '';
+		if(isset($_GET['q'])) {
+			$q = $_GET['q'];
+		}
+		?>
+        <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+        <button type="submit" class="btn btn-primary" type="button">Search</button>
+	</form>
+	<h2>Author Lists</h2>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>ID</th>
+            <th>Lastname</th>
+			<th>Firstname</th>			
+			<th>Email</th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php foreach(html_escape($all) as $author): ?>
+		<tr>
+            <td><?=$author['id'];?></td>
+            <td><?=$author['last_name'];?></td>
+			<td><?=$author['first_name'];?></td>			
+			<td><?=$author['email'];?></td>
+		</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+	<?php
+	echo $page;?>
+	</div>
 
 </body>
 </html>
