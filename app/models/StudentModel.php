@@ -26,9 +26,7 @@ class StudentModel extends Model {
             $query->like('id', '%'.$q.'%')
                 ->or_like('first_name', '%'.$q.'%')
                 ->or_like('last_name', '%'.$q.'%')
-                ->or_like('birthdate', '%'.$q.'%')
-                ->or_like('email', '%'.$q.'%')
-                ->or_like('added', '%'.$q.'%');
+                ->or_like('email', '%'.$q.'%');
 
             // Clone before pagination
             $countQuery = clone $query;
