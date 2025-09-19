@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Students List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen flex">
 
@@ -25,53 +27,45 @@
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1 p-10">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-            <form action="<?=site_url('/');?>" method="get" class="flex justify-end gap-2 w-full md:w-auto">
-                <?php
-                $q = '';
-                if(isset($_GET['q'])) {
-                    $q = $_GET['q'];
-                }
-                ?>
-                <input class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Search</button>
-            </form>
-            <div class="flex gap-2 w-full md:w-auto">
-                <a href="<?=site_url('/students/create');?>" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition font-medium text-center w-full md:w-auto">+ Create New User</a>
-                <a href="<?=site_url('/students/delete_all');?>" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-medium text-center w-full md:w-auto"
-                   onclick="return confirm('Are you sure you want to delete all users? This action cannot be undone.');">🗑️ Delete All Users</a>
-            </div>
-        </div>
-        <h2 class="text-xl font-semibold mb-4">Student Lists</h2>
-        <div class="overflow-x-auto rounded-lg shadow">
-            <table class="min-w-full bg-white">
-                <thead>
-                <tr class="bg-blue-100 text-gray-700">
-                    <th class="py-2 px-4 text-left">ID</th>
-                    <th class="py-2 px-4 text-left">Lastname</th>
-                    <th class="py-2 px-4 text-left">Firstname</th>
-                    <th class="py-2 px-4 text-left">Email</th>
-                    <th class="py-2 px-4 text-left">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach(html_escape($all) as $author): ?>
-                <tr class="border-b hover:bg-blue-50">
-                    <td class="py-2 px-4"><?=$author['id'];?></td>
-                    <td class="py-2 px-4"><?=$author['last_name'];?></td>
-                    <td class="py-2 px-4"><?=$author['first_name'];?></td>
-                    <td class="py-2 px-4"><?=$author['email'];?></td>
-                    <td class="py-2 px-4">
-                        <a href="<?=site_url('/students/edit/'.$author['id']);?>" class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition text-sm">Edit</a>
-                        <a href="<?=site_url('/students/delete/'.$author['id']);?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+    <div class="container mt-3 ">
+	<form action="<?=site_url('author');?>" method="get" class="col-sm-4 float-end d-flex">
+		<?php
+		$q = '';
+		if(isset($_GET['q'])) {
+			$q = $_GET['q'];
+		}
+		?>
+        <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+        <button type="submit" class="btn btn-primary" type="button">Search</button>
+	</form>
+	<h2>Students Lists</h2>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+            <th>No.</th>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+            <th>Actions</th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php $i = 1; foreach(html_escape($all) as $students): ?>
+		<tr>
+			<td><?=$i++;?></td>
+			<td><?=$students['first_name'];?></td>
+			<td><?=$students['last_name'];?></td>
+			<td><?=$students['email'];?></td>
+            <td>
+                <a href="<?=site_url('students/edit/'.$students['id']);?>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="<?=site_url('students/delete/'.$students['id']);?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+            </td>
+		</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+	<?php
+	echo $page;?>
+	</div>
 </body>
 </html>

@@ -15,8 +15,7 @@ class Students extends Controller {
     }
 
     public function accounts()
-    {
-        
+    {        
         $page = 1;
         if(isset($_GET['page']) && ! empty($_GET['page'])) {
             $page = $this->io->get('page');
@@ -26,10 +25,10 @@ class Students extends Controller {
         if(isset($_GET['q']) && ! empty($_GET['q'])) {
             $q = trim($this->io->get('q'));
         }
-        
-        $records_per_page = 10;
 
-        $all = $this->StudentModel->get_all($q, $records_per_page, $page);
+        $records_per_page = 5;
+
+        $all = $this->StudentModel->generate($q, $records_per_page, $page);
         $data['all'] = $all['records'];
         $total_rows = $all['total_rows'];
         $this->pagination->set_options([
