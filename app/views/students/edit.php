@@ -14,7 +14,7 @@
             <a href="/students/dashboard" class="px-4 py-2 rounded-lg hover:bg-blue-100 transition font-medium text-gray-700">
                 📊 Dashboard
             </a>
-            <a href="/students/accounts" class="px-4 py-2 rounded-lg hover:bg-blue-100 transition font-medium text-gray-700">
+            <a href="/" class="px-4 py-2 rounded-lg hover:bg-blue-100 transition font-medium text-gray-700">
                 👤 Accounts
             </a>
             <a href="/students/settings" class="px-4 py-2 rounded-lg hover:bg-blue-100 transition font-medium text-gray-700">
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <a href="/students/accounts" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">⬅ Back</a>
+                    <a href="/" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">⬅ Back</a>
                     <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">✅ Update</button>
                 </div>
             </form>
