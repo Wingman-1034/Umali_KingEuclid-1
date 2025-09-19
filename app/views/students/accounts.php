@@ -38,14 +38,14 @@
         <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit" class="btn btn-primary" type="button">Search</button>
 	</form>
-	<h2>Students Lists</h2>
+	<h2 class="text-2xl font-bold text-gray-800 mb-4">Students Lists</h2>
     <div class="flex gap-3 mb-4">
-        <a href="/students/create" class="bg-green-600 text-white px-5 py-2 rounded-lg shadow hover:bg-green-700 transition">
+        <a href="/students/create" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">
             + Add New Student
         </a>
         <a href="/students/delete_all"
             onclick="return confirm('Are you sure you want to delete ALL records?')"
-            class="bg-red-700 text-white px-5 py-2 rounded-lg shadow hover:bg-red-800 transition">
+            class="bg-red-700 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 transition">
             Delete All
         </a>
     </div>
