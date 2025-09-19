@@ -26,7 +26,7 @@
 
     <!-- Main Content -->
     <div class="container mt-3 ">
-	<form action="<?=site_url('author');?>" method="get" class="col-sm-4 float-end d-flex">
+	<form action="<?=site_url('/');?>" method="get" class="col-sm-4 float-end d-flex">
 		<?php
 		$q = '';
 		if(isset($_GET['q'])) {
