@@ -71,32 +71,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-6 flex justify-between items-center">
-            <!-- Pagination styling -->
-            <nav class="inline-flex rounded-md shadow-sm" aria-label="Pagination">
-                <?php
-                // If $page is a string of HTML, you may want to parse and style it.
-                // Otherwise, you can echo it directly, or replace with your own pagination logic.
-                // Example: echo $page;
-                ?>
-                <div class="flex gap-1">
-                    <?php
-                    // Try to add Tailwind classes to pagination links if possible
-                    // If $page is a string, you may need to update the pagination view in your backend for better styling.
-                    echo str_replace(
-                        ['<a ', '<span class="current">', '<span>', '</span>'],
-                        [
-                            '<a class="px-3 py-1 border border-gray-300 bg-white text-gray-700 hover:bg-blue-100 rounded transition" ',
-                            '<span class="px-3 py-1 border border-blue-500 bg-blue-500 text-white rounded font-semibold">',
-                            '<span class="px-3 py-1 border border-gray-300 bg-gray-100 text-gray-500 rounded">',
-                            '</span>'
-                        ],
-                        $page
-                    );
-                    ?>
-                </div>
-            </nav>
-        </div>
     </div>
 
 </body>
