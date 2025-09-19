@@ -41,6 +41,11 @@ class Students extends Controller {
         $this->pagination->set_theme('bootstrap'); // or 'tailwind', or 'custom'
         $this->pagination->initialize($total_rows, $records_per_page, $page, site_url('author').'?q='.$q);
         $data['page'] = $this->pagination->paginate();
+
+        // Pass page and records_per_page to the view for correct numbering
+        $data['current_page'] = (int)$page;
+        $data['records_per_page'] = (int)$records_per_page;
+
         $this->call->view('students/accounts', $data);
     }
 

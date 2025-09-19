@@ -60,7 +60,9 @@
 		</tr>
 		</thead>
 		<tbody>
-		<?php $i = 1; foreach(html_escape($all) as $students): ?>
+		<?php
+		$i = 1 + ($current_page - 1) * $records_per_page;
+		foreach(html_escape($all) as $students): ?>
 		<tr>
 			<td><?=$i++;?></td>
 			<td><?=$students['first_name'];?></td>
