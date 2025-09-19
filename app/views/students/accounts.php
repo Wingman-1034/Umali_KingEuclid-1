@@ -43,7 +43,7 @@
                    onclick="return confirm('Are you sure you want to delete all users? This action cannot be undone.');">🗑️ Delete All Users</a>
             </div>
         </div>
-        <h2 class="text-xl font-semibold mb-4">Author Lists</h2>
+        <h2 class="text-xl font-semibold mb-4">Student Lists</h2>
         <div class="overflow-x-auto rounded-lg shadow">
             <table class="min-w-full bg-white">
                 <thead>
@@ -71,7 +71,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-6 flex justify-center">
+        <div class="mt-6 flex justify-between items-center">
             <!-- Pagination styling -->
             <nav class="inline-flex rounded-md shadow-sm" aria-label="Pagination">
                 <?php
