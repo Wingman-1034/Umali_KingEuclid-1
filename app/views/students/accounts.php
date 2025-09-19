@@ -26,16 +26,23 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-10">
-        <form action="<?=site_url('/');?>" method="get" class="flex justify-end mb-6 gap-2">
-            <?php
-            $q = '';
-            if(isset($_GET['q'])) {
-                $q = $_GET['q'];
-            }
-            ?>
-            <input class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Search</button>
-        </form>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <form action="<?=site_url('/');?>" method="get" class="flex justify-end gap-2 w-full md:w-auto">
+                <?php
+                $q = '';
+                if(isset($_GET['q'])) {
+                    $q = $_GET['q'];
+                }
+                ?>
+                <input class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Search</button>
+            </form>
+            <div class="flex gap-2 w-full md:w-auto">
+                <a href="<?=site_url('/students/create');?>" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition font-medium text-center w-full md:w-auto">+ Create New User</a>
+                <a href="<?=site_url('/students/delete_all');?>" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-medium text-center w-full md:w-auto"
+                   onclick="return confirm('Are you sure you want to delete all users? This action cannot be undone.');">🗑️ Delete All Users</a>
+            </div>
+        </div>
         <h2 class="text-xl font-semibold mb-4">Author Lists</h2>
         <div class="overflow-x-auto rounded-lg shadow">
             <table class="min-w-full bg-white">
@@ -64,8 +71,31 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-4">
-            <?php echo $page;?>
+        <div class="mt-6 flex justify-center">
+            <!-- Pagination styling -->
+            <nav class="inline-flex rounded-md shadow-sm" aria-label="Pagination">
+                <?php
+                // If $page is a string of HTML, you may want to parse and style it.
+                // Otherwise, you can echo it directly, or replace with your own pagination logic.
+                // Example: echo $page;
+                ?>
+                <div class="flex gap-1">
+                    <?php
+                    // Try to add Tailwind classes to pagination links if possible
+                    // If $page is a string, you may need to update the pagination view in your backend for better styling.
+                    echo str_replace(
+                        ['<a ', '<span class="current">', '<span>', '</span>'],
+                        [
+                            '<a class="px-3 py-1 border border-gray-300 bg-white text-gray-700 hover:bg-blue-100 rounded transition" ',
+                            '<span class="px-3 py-1 border border-blue-500 bg-blue-500 text-white rounded font-semibold">',
+                            '<span class="px-3 py-1 border border-gray-300 bg-gray-100 text-gray-500 rounded">',
+                            '</span>'
+                        ],
+                        $page
+                    );
+                    ?>
+                </div>
+            </nav>
         </div>
     </div>
 
