@@ -15,31 +15,27 @@ class StudentModel extends Model {
         parent::__construct();
     }
 
-    public function get_all($q = '', $records_per_page = null, $page = null)
+    public function get_all($q, $records_per_page = null, $page = null)
     {
-        if (is_null($records_per_page) || is_null($page)) {
-            // No pagination, just return all
-            return $this->db->table($this->table)->get_all();
+        if (is_null($page)) {
+            return $this->db->table('students')->get_all();
         } else {
-            $query = $this->db->table($this->table);
+            $query = $this->db->table('students');
 
-            // Only add search if $q is not empty
-            if (!empty($q)) {
-                $query->group_start()
-                    ->like('id', '%'.$q.'%')
-                    ->or_like('first_name', '%'.$q.'%')
-                    ->or_like('last_name', '%'.$q.'%')
-                    ->or_like('email', '%'.$q.'%')
-                    ->group_end();
-            }
+            // Build LIKE conditions
+            $query->like('id', '%'.$q.'%')
+                ->or_like('first_name', '%'.$q.'%')
+                ->or_like('last_name', '%'.$q.'%')
+                ->or_like('email', '%'.$q.'%');
 
-            // Clone before pagination for total count
+            // Clone before pagination
             $countQuery = clone $query;
-            $data['total_rows'] = $countQuery->select_count('*', 'count')->get()['count'];
 
-            // Calculate offset
-            $offset = ($page - 1) * $records_per_page;
-            $data['records'] = $query->limit($records_per_page, $offset)->get_all();
+            $data['total_rows'] = $countQuery->select_count('*', 'count')
+                                            ->get()['count'];
+
+            $data['records'] = $query->pagination($records_per_page, $page)
+                                    ->get_all();
 
             return $data;
         }
@@ -69,4 +65,6 @@ class StudentModel extends Model {
     {
         return $this->db->raw("TRUNCATE TABLE {$this->table}");
     }
+
+
 }
